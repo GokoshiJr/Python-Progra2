@@ -4,10 +4,6 @@ usuarios con nombre, cedula, fecha de nacimiento y direccion, la busqueda debe
 ser por cedula
 '''
 
-from multiprocessing.managers import ValueProxy
-from unittest import expectedFailure
-
-
 class Usuario:
   # constructor
   def __init__(self, cedula, nombre, fecha_nacimiento, direccion):
@@ -35,11 +31,29 @@ class Usuario:
     self.fecha_nacimiento = fecha_nacimiento
   def set_direccion(self, direccion):
     self.direccion = direccion
-  
+
+  def mostrar(self):
+    print(f' Cedula: {self.cedula} Nombre: {self.nombre} Fecha Nacimiento: {self.fecha_nacimiento} Direccion: {self.direccion}')
+
 usuarios_array = []
 salir = False
 linea = '-'*30
 opc = 0
+
+def crear_usuario():
+  cedula = input(' Ingrese la cedula: ')
+  nombre = input(' Ingrese el nombre: ')
+  fecha_nacimiento = input(' Ingrese la fecha de nacimiento ej (05/05/05): ')
+  direccion = input(' Ingrese la direccion: ')
+  usuario = Usuario(cedula, nombre, fecha_nacimiento, direccion)  
+  usuarios_array.append(usuario)
+
+def mostrar_usuarios():
+  if (len(usuarios_array) == 0):
+    print(' No hay usuarios registrados.')
+  else:
+    for usuario in usuarios_array:
+      usuario.mostrar()
 
 while not (salir):
   try:
@@ -56,9 +70,9 @@ while not (salir):
     opc = int(input(' Seleccione una opcion: '))
     print(linea)
     if (opc == 1):
-      pass
+      mostrar_usuarios()
     elif (opc == 2):
-      pass
+      crear_usuario()
     elif (opc == 3):
       pass
     elif (opc == 4):
@@ -66,13 +80,16 @@ while not (salir):
     elif (opc == 5):
       pass
     elif (opc == 6):
-      pass
+      salir = True
+      print(' Fin del programa...')
     else:
       print(' Error: Ingrese una opcion valida.')    
-  except ValueError:
+  except ValueError as e:
+    print(e.with_traceback)
     print(linea)
     print(' Error: solo se permite ingresar numeros enteros.')
-  except TypeError:
+  except TypeError as e:
+    print(e.with_traceback)
     print(linea)
     print(' Error: solo se permite ingresar numeros enteros.')  
 

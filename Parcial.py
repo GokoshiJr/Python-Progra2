@@ -4,6 +4,10 @@ usuarios con nombre, cedula, fecha de nacimiento y direccion, la busqueda debe
 ser por cedula
 '''
 
+from multiprocessing.managers import ValueProxy
+from unittest import expectedFailure
+
+
 class Usuario:
   # constructor
   def __init__(self, cedula, nombre, fecha_nacimiento, direccion):
@@ -38,4 +42,37 @@ linea = '-'*30
 opc = 0
 
 while not (salir):
-  pass
+  try:
+    print(linea)
+    print(' CRUD de Usuarios')
+    print(linea)
+    print(' 1. Listar todos los usuarios')
+    print(' 2. Agregar usuario')
+    print(' 3. Consultar usuario')
+    print(' 4. Actualizar usuario')
+    print(' 5. Eliminar usuario')
+    print(' 6. Salir del programa')
+    print(linea)
+    opc = int(input(' Seleccione una opcion: '))
+    print(linea)
+    if (opc == 1):
+      pass
+    elif (opc == 2):
+      pass
+    elif (opc == 3):
+      pass
+    elif (opc == 4):
+      pass
+    elif (opc == 5):
+      pass
+    elif (opc == 6):
+      pass
+    else:
+      print(' Error: Ingrese una opcion valida.')    
+  except ValueError:
+    print(linea)
+    print(' Error: solo se permite ingresar numeros enteros.')
+  except TypeError:
+    print(linea)
+    print(' Error: solo se permite ingresar numeros enteros.')  
+

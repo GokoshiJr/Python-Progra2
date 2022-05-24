@@ -35,11 +35,13 @@ class Usuario:
   def mostrar(self):
     print(f' Cedula: {self.cedula} Nombre: {self.nombre} Fecha Nacimiento: {self.fecha_nacimiento} Direccion: {self.direccion}')
 
+# definicion de variables
 usuarios_array = []
 salir = False
 linea = '-'*30
 opc = 0
 
+# crea un usuario
 def crear_usuario():
   cedula = input(' Ingrese la cedula: ')
   nombre = input(' Ingrese el nombre: ')
@@ -48,6 +50,7 @@ def crear_usuario():
   usuario = Usuario(cedula, nombre, fecha_nacimiento, direccion)  
   usuarios_array.append(usuario)
 
+# muestra todos los usuarios
 def mostrar_usuarios():
   if (len(usuarios_array) == 0):
     print(' No hay usuarios registrados.')
@@ -55,12 +58,14 @@ def mostrar_usuarios():
     for usuario in usuarios_array:
       usuario.mostrar()
 
+# busca el usuario por la cedula y lo retorna
 def buscar_por_cedula(cedula):
   for usuario in usuarios_array:
     if (usuario.get_cedula() == cedula):
       return usuario
   return None
 
+# consulta un usuario por la cedula
 def consultar_usuario():
   cedula = input(' Ingrese la cedula del usuario a consultar: ')
   usuario = buscar_por_cedula(cedula)
@@ -69,6 +74,7 @@ def consultar_usuario():
   else:
     usuario.mostrar()
 
+# actualiza un usuario
 def actualizar_usuario():
   opc = 0
   cedula = input(' Ingrese la cedula del usuario a actualizar: ')
@@ -77,7 +83,8 @@ def actualizar_usuario():
     print(' Usuario no encontrado')
   else:
     print(' ¿Que desea actualizar? \n 1. Cedula\n 2. Nombre\n 3. Fecha Nacimiento\n 4. Direccion ')
-    opc = int(input(' Su opcion: '))
+    print(linea)
+    opc = int(input(' Opcion: '))
     if (opc == 1):
       cedula = input(' Ingrese la cedula: ')
       usuario.set_cedula(cedula)
@@ -92,6 +99,21 @@ def actualizar_usuario():
       usuario.set_direccion(direccion)
     else:
       print(' Error: Ingrese una opcion valida.')
+
+# elimina un usuario
+def eliminar_ususario():
+  contador = 0
+  cedula = input(' Ingrese la cedula del usuario a eliminar: ')
+  usuario = buscar_por_cedula(cedula)
+  if not (usuario):
+    print(' Usuario no encontrado')
+  else:
+    for aux in usuarios_array:
+      if aux == usuario:
+        break
+      contador += 1
+    usuarios_array.pop(contador)
+    print(' Usuario eliminado con exito.')
 
 while not (salir):
   try:
@@ -116,7 +138,7 @@ while not (salir):
     elif (opc == 4):
       actualizar_usuario()
     elif (opc == 5):
-      pass
+      eliminar_ususario()
     elif (opc == 6):
       salir = True
       print(' Fin del programa...')
@@ -129,5 +151,4 @@ while not (salir):
   except TypeError as e:
     print(e.with_traceback)
     print(linea)
-    print(' Error: solo se permite ingresar numeros enteros.')  
-
+    print(' Error: solo se permite ingresar numeros enteros.')

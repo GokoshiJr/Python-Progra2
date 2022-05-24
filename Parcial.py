@@ -55,6 +55,44 @@ def mostrar_usuarios():
     for usuario in usuarios_array:
       usuario.mostrar()
 
+def buscar_por_cedula(cedula):
+  for usuario in usuarios_array:
+    if (usuario.get_cedula() == cedula):
+      return usuario
+  return None
+
+def consultar_usuario():
+  cedula = input(' Ingrese la cedula del usuario a consultar: ')
+  usuario = buscar_por_cedula(cedula)
+  if not (usuario):
+    print(' Usuario no encontrado')
+  else:
+    usuario.mostrar()
+
+def actualizar_usuario():
+  opc = 0
+  cedula = input(' Ingrese la cedula del usuario a actualizar: ')
+  usuario = buscar_por_cedula(cedula)
+  if not (usuario):
+    print(' Usuario no encontrado')
+  else:
+    print(' ¿Que desea actualizar? \n 1. Cedula\n 2. Nombre\n 3. Fecha Nacimiento\n 4. Direccion ')
+    opc = int(input(' Su opcion: '))
+    if (opc == 1):
+      cedula = input(' Ingrese la cedula: ')
+      usuario.set_cedula(cedula)
+    elif (opc == 2):
+      nombre = input(' Ingrese el nombre: ')
+      usuario.set_nombre(nombre)
+    elif (opc == 3):
+      fecha_nacimiento = input(' Ingrese la fecha de nacimiento ej (05/05/05): ')
+      usuario.set_fecha_nacimiento(fecha_nacimiento)
+    elif (opc == 4):
+      direccion = input(' Ingrese la direccion: ')
+      usuario.set_direccion(direccion)
+    else:
+      print(' Error: Ingrese una opcion valida.')
+
 while not (salir):
   try:
     print(linea)
@@ -74,9 +112,9 @@ while not (salir):
     elif (opc == 2):
       crear_usuario()
     elif (opc == 3):
-      pass
+      consultar_usuario()
     elif (opc == 4):
-      pass
+      actualizar_usuario()
     elif (opc == 5):
       pass
     elif (opc == 6):
